@@ -35,7 +35,8 @@ class Database {
         
         const CATEGORIAS_SCHEMA = `CREATE TABLE IF NOT EXISTS categorias (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                nome TEXT NOT NULL) `;
+                                nome TEXT NOT NULL,
+                                prioridade TEXT NOT NULL ) `;
                         
         const CHAMADOS_SCHEMA = `CREATE TABLE IF NOT EXISTS chamados (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -43,7 +44,6 @@ class Database {
                                 cep TEXT NOT NULL,
                                 cidade TEXT NOT NULL,
                                 uf TEXT NOT NULL,
-                                prioridade TEXT NOT NULL,
                                 status TEXT NOT NULL,
                                 dataAbertura TEXT NOT NULL,
                                 usuario_id INTEGER NOT NULL,
