@@ -35,8 +35,7 @@ class Database {
         
         const CATEGORIAS_SCHEMA = `CREATE TABLE IF NOT EXISTS categorias (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                nome TEXT NOT NULL,
-                                prioridade TEXT NOT NULL ) `;
+                                nome TEXT NOT NULL) `;
                         
         const CHAMADOS_SCHEMA = `CREATE TABLE IF NOT EXISTS chamados (
                                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -45,7 +44,9 @@ class Database {
                                 cidade TEXT NOT NULL,
                                 uf TEXT NOT NULL,
                                 status TEXT NOT NULL,
-                                dataAbertura TEXT NOT NULL,
+                                prioridade TEXT NOT NULL,
+                                data_criacao TEXT NOT NULL,
+                                data_conclusao TEXT,
                                 usuario_id INTEGER NOT NULL,
                                 categoria_id INTEGER NOT NULL,
                                 FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
@@ -64,11 +65,10 @@ class Database {
         schemas.forEach(schema => {
             this.#db.run(schema, (err) => {
                 if (err) return console.error(`Erro ao criar tabela (${schema}). Erro: ${err}`);
-                console.log(`Tabela ${schema} criada!`);
             });
         });
         
-        console.log('Tabelas criadas com sucesso!');
+        console.log('Tabelas criadas com sucesso!\n');
     }
 }
 
