@@ -1,6 +1,6 @@
 const express = require('express');
 
-const chamadoService = require('./services/chamadoService.js');
+const Observer = require('./observers/Observer.js');
 const logMiddleware = require('./middlewares/logMiddleware.js');
 const LoggerObserver = require('./observers/LoggerObserver.js');
 
@@ -9,12 +9,14 @@ const loginRoutes = require('./routes/loginRoutes.js');
 const indicadoresRoutes = require('./routes/indicadoresRoutes.js');
 const relatorioRoutes = require('./routes/relatorioRoutes.js');
 
+const observer = new Observer();
+
 const app = express();
 
 app.use(express.json());
 app.use(logMiddleware);
 
-chamadoService.addObservador(new LoggerObserver());
+observer.addObserver(new LoggerObserver());
 
 app.use(chamadoRoutes);
 app.use(loginRoutes);

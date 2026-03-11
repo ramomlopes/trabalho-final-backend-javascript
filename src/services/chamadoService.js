@@ -1,18 +1,9 @@
 const chamadoRepositorie = require('../repositories/chamadoRepositorie');
 const ChamadoFactory = require('../factories/ChamadoFactory');
 const historicoStatusRepositorie = require('../repositories/historicoStatusChamadoRepositorie');
-
-let observers = [];
+const Observer = require('../observers/Observer');
 
 const chamadoService = {
-
-    addObservador(observer) {
-        observers.push(observer);
-    },
-
-    notify(dados) {
-        observers.forEach(observer => observer.update(dados));
-    },
 
     regraAtualizacaoStatusChamado(status) {
 
@@ -108,7 +99,8 @@ const chamadoService = {
             }
 
             historicoStatusRepositorie.atualizar(dados);
-            this.notify(dados);
+            const observer = new Observer();
+            observer.notify(dados);
             
         } catch (error) {
             throw new Error(error.message);
